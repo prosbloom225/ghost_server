@@ -10,6 +10,9 @@ public class ModItem extends BaseItem {
 
     public ModItem(String name) {
         super(name);
-        modName = LibMisc.MODNAME;
+    }
+    @Override
+    public void setModName() {
+        this.modName = LibMisc.MODNAME;
     }
 }

@@ -9,7 +9,6 @@ public class BaseItem extends BaseEntity {
 
 
     private String name;
-    protected String modName = "base";
 
     public String getModName() {
         return modName;
@@ -22,8 +21,9 @@ public class BaseItem extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
+    @Override
     public void setModName(){
-        this.name = "base";
+        this.modName = "base";
     }
 
     public BaseItem(String name) {

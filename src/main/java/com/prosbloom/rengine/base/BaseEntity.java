@@ -8,7 +8,7 @@ import java.io.*;
 public abstract class BaseEntity implements Serializable{
 
     protected String name;
-    protected String modName = "base";
+    protected String modName;
 
     public String getModName() {
         return modName;
@@ -24,6 +24,7 @@ public abstract class BaseEntity implements Serializable{
 
     public BaseEntity(String name) {
         this.name = name;
+        setModName();
     }
 
     public abstract void setModName();
