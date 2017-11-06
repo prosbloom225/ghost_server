@@ -5,9 +5,9 @@ import java.io.*;
 /**
  * Created by prosbloom on 11/4/17.
  */
-public class BaseEntity {
+public abstract class BaseEntity implements Serializable{
 
-    private String name;
+    protected String name;
     protected String modName = "base";
 
     public String getModName() {
@@ -25,6 +25,8 @@ public class BaseEntity {
     public BaseEntity(String name) {
         this.name = name;
     }
+
+    public abstract void setModName();
 
     public BaseItem clone() {
         try {

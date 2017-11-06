@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * Created by prosbloom on 11/4/17.
  */
-public class BaseItem implements Serializable{
+public class BaseItem extends BaseEntity {
 
 
     private String name;
@@ -22,24 +22,13 @@ public class BaseItem implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
+    public void setModName(){
+        this.name = "base";
+    }
 
     public BaseItem(String name) {
+        super(name);
         this.name = name;
     }
 
-    public BaseItem clone() {
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(baos);
-            oos.writeObject(this);
-
-            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream ois = new ObjectInputStream(bais);
-            return (BaseItem) ois.readObject();
-        } catch (IOException e) {
-            return null;
-        } catch (ClassNotFoundException e) {
-            return null;
-        }
-    }
 }

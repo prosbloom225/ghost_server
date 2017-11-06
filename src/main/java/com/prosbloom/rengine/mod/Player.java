@@ -13,6 +13,10 @@ public class Player extends BaseEntity{
     private int hp;
     private int mp;
 
+    public void setModName(){
+        this.modName = "base";
+    }
+
     public Player(String name, int maxhp, int maxmp) {
         super(name);
         this.maxhp = maxhp;
