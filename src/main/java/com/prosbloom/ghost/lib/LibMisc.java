@@ -5,4 +5,8 @@ package com.prosbloom.ghost.lib;
  */
 public class LibMisc {
     public static final String MODNAME  = "ghost";
+    public enum ITYPE {
+        weapon,
+        armor
+    };
 }

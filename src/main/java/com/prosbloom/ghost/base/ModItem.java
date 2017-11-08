@@ -1,4 +1,4 @@
-package com.prosbloom.ghost.item;
+package com.prosbloom.ghost.base;
 
 import com.prosbloom.ghost.lib.LibMisc;
 import com.prosbloom.rengine.base.BaseItem;
@@ -8,10 +8,10 @@ import com.prosbloom.rengine.base.BaseItem;
  */
 public class ModItem extends BaseItem {
 
-    public ModItem(String name) {
-        super(name);
+    public ModItem(String name, int ilvl) {
+        super(name, ilvl);
     }
-    @Override
+
     public void setModName() {
         this.modName = LibMisc.MODNAME;
     }

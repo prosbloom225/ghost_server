@@ -1,14 +1,13 @@
-package com.prosbloom.rengine.generators;
+package com.prosbloom.rengine.factory;
 
 import com.prosbloom.rengine.base.BaseItem;
 
 /**
  * Created by prosbloom on 11/6/17.
  */
-public class RandomItemGenerator {
+public class RandomItemFactory extends ItemFactory{
     public BaseItem generate() {
-        String name = "";
-        BaseItem item = new BaseItem(name);
+        BaseItem item = new BaseItem("", 0);
         return item;
     }
 }

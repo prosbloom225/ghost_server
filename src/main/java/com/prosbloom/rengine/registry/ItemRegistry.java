@@ -29,7 +29,7 @@ public class ItemRegistry {
     }
 
     public static String addItem(String key, BaseItem item) {
-        log.info("Adding item: " + key);
+        log.debug("Adding item: " + key);
         items.put(key, item);
         return key;
     }
