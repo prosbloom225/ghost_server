@@ -7,7 +7,10 @@ import com.prosbloom.rengine.base.BaseItem;
  */
 public class RandomItemFactory {
     public BaseItem generate() {
-        BaseItem item = new BaseItem("", 0);
+        BaseItem item = BaseItem.builder()
+                .setIlvl(0)
+                .setName("rngItem")
+                .build();
         return item;
     }
 }

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prosbloom.ghost.base.ModItem;
 import com.prosbloom.ghost.model.ModItemModel;
 import com.prosbloom.rengine.base.BaseItem;
-import com.prosbloom.rengine.factory.ItemBuilder;
 import com.prosbloom.rengine.registry.ItemRegistry;
 import org.apache.log4j.Logger;
 
@@ -40,10 +39,10 @@ public class ModItems {
              ModItemModel[] json = om.readValue(f, ModItemModel[].class);
              for (ModItemModel model : json) {
                  log.debug("model loaded from json: " + model.getName());
-                 BaseItem item = new ItemBuilder(BaseItem.class)
+                 BaseItem item = BaseItem.builder()
                          .setIlvl(model.getIlvl())
                          .setName(model.getName())
-                         .create();
+                         .build();
                  register(item);
              }
         } catch (IOException  e)  {
@@ -53,7 +52,10 @@ public class ModItems {
 
     private static ModItem loadItemFromJson(Map<String, String> json) {
         // handle nonjava backed items first
-        ModItem item = new ModItem("", 0);
+        ModItem item = ModItem.builder()
+                .setIlvl(0)
+                .setName("")
+                .build();
         return item;
     }
 }

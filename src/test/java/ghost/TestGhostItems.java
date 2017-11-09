@@ -1,14 +1,11 @@
 package ghost;
 
-import com.prosbloom.ghost.factory.GhostItemFactory;
 import com.prosbloom.ghost.factory.GhostItemGenerator;
 import com.prosbloom.ghost.base.ModItem;
 import com.prosbloom.ghost.item.GhostDemoUniqueItem;
 import com.prosbloom.ghost.lib.LibMisc;
 import com.prosbloom.ghost.mod.ModItems;
 import com.prosbloom.rengine.base.BaseItem;
-import com.prosbloom.rengine.factory.ItemBuilder;
-import com.prosbloom.rengine.factory.ItemFactory;
 import com.prosbloom.rengine.registry.ItemRegistry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,17 +28,21 @@ public class TestGhostItems {
     @DisplayName("Test mod item")
     @Test
     void testItem() {
-        ModItem testItem0 = new ModItem("testModItem0", 0);
+        ModItem testItem0 = ModItem.builder()
+                .setIlvl(1)
+                .setName("testModItem0")
+                .build();
         ModItems.register(testItem0);
         assertEquals("testModItem0", ItemRegistry.getItem("ghost:testModItem0").getName());
     }
 
-    @DisplayName("Test item registry loading ModItem")
+    @DisplayName("Test item registry direct loading ModItem")
     @Test
     void testItemFactoryModItemLoad() {
-        BaseItem item = GhostItemFactory.build("testItem")
+        ModItem item = ModItem.builder()
                 .setIlvl(9)
-                .create();
+                .setName("testItem")
+                .build();
         ItemRegistry.addItem(item);
         assertEquals(item.toString(), ItemRegistry.getItem("ghost:testItem").toString());
         assertEquals("ghost", item.getModName());
@@ -51,7 +52,7 @@ public class TestGhostItems {
     @Test
     void testRandomItem() {
         GhostItemGenerator gig = new GhostItemGenerator();
-        BaseItem item = gig.generate(17);
+        ModItem item = gig.generate(17);
         // check all properties
         assertEquals(LibMisc.MODNAME, item.getModName());
         assertEquals(17, item.getIlvl());
@@ -80,9 +81,8 @@ public class TestGhostItems {
     @DisplayName("Test unique weapon")
     @Test
     void testUniqueWeapon() {
-        GhostDemoUniqueItem item = new GhostDemoUniqueItem(17);
-        // check weapon properties
-        assertEquals(17, item.getIlvl());
+        GhostDemoUniqueItem item = new GhostDemoUniqueItem();
+        assertEquals(item, item);
     }
     @DisplayName("Test bulk loader from json - no java backed")
     @Test
