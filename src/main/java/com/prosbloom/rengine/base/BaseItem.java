@@ -1,11 +1,14 @@
 package com.prosbloom.rengine.base;
 
+import org.apache.log4j.Logger;
+
 import java.io.*;
 
 /**
  * Created by prosbloom on 11/4/17.
  */
 public class BaseItem extends BaseEntity {
+    final static Logger log = Logger.getLogger(BaseItem.class.getName());
 
     private int ilvl = 0;
 
@@ -20,7 +23,9 @@ public class BaseItem extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
-    public void setModName(){
+
+    @Override
+    public void setModName() {
         this.modName = "base";
     }
 
@@ -32,11 +37,6 @@ public class BaseItem extends BaseEntity {
         this.ilvl = ilvl;
     }
 
-    public BaseItem(String name, int ilvl) {
-        super(name);
-        this.ilvl = ilvl;
-    }
-
     @Override
     public String toString() {
         return "BaseItem{" +
@@ -45,14 +45,31 @@ public class BaseItem extends BaseEntity {
                 '}';
     }
 
-    public BaseItem(String name) {
-        super(name);
-        this.ilvl = 0;
+
+    // Builder code and constructor
+    public static abstract class Builder<T extends BaseItem> extends BaseEntity.Builder<T> {
+        private int ilvl;
+
+        public Builder<T> setIlvl(int ilvl) {
+            this.ilvl= ilvl;
+            return this;
+        }
     }
-    public BaseItem() {
-        // this should only be called by the factory,
-        // TODO - really should remove all constructors for BaseItem since factory
-        super("");
-        this.ilvl = 0;
+    public static Builder<?> builder() {
+        return new Builder<BaseItem>()
+        {
+            @Override
+            public BaseItem build()
+            {
+                return new BaseItem(this);
+            }
+        };
+    }
+
+    protected BaseItem(Builder<?> builder) {
+        super(builder);
+        this.ilvl= builder.ilvl;
     }
 }
+
+

@@ -10,18 +10,21 @@ import com.prosbloom.rengine.factory.RandomItemFactory;
  */
 public class GhostItemGenerator extends RandomItemFactory {
 
-    @Override
-    public BaseItem generate(){
-        BaseItem item = new ModItem("rng", 1);
+    private ModItem createItem(int ilvl){
+        ModItem item = ModItem.builder()
+                .setIlvl(ilvl)
+                .setName("rngModItem")
+                .build();
         return item;
     }
-    public BaseItem generate(int ilvl){
-        BaseItem item = generate();
-        item.setIlvl(ilvl);
+
+    // overloads
+    public ModItem generate(int ilvl){
+        ModItem item = createItem(ilvl);
         return item;
     }
-    public BaseItem generate(int ilvl, LibMisc.ITYPE type) {
-        BaseItem item = generate(ilvl);
+    public ModItem generate(int ilvl, LibMisc.ITYPE type) {
+        ModItem item = generate(ilvl);
         switch (type) {
             case weapon:
                 break;

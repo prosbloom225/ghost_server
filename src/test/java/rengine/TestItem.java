@@ -1,7 +1,6 @@
 package rengine;
 
 import com.prosbloom.rengine.base.BaseItem;
-import com.prosbloom.rengine.factory.ItemFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,33 +13,34 @@ public class TestItem {
     @DisplayName("Test generic item factory")
     @Test
     void testGenericItemFactory() {
-        ItemFactory factory = new ItemFactory();
-        BaseItem item = factory.build(BaseItem.class)
+        BaseItem item = BaseItem.builder()
                 .setName("testItem")
-                .create();
+                .build();
+
         assertEquals("testItem", item.getName());
     }
 
     @DisplayName("Generate basic item")
     @Test
     void testBasicItem() {
-        BaseItem item = new ItemFactory().build()
-                .setName("testItem1")
+        BaseItem item = BaseItem.builder()
                 .setIlvl(1)
-                .create();
+                .setName("testItem1")
+                .build();
         assertEquals("testItem1", item.getName());
+        assertEquals("base", item.getModName());
     }
     @DisplayName("Generate multiple basic items")
     @Test
     void testBasicItems() {
-        BaseItem item1 = new ItemFactory().build()
-                .setName("testItem1")
+        BaseItem item1 = BaseItem.builder()
                 .setIlvl(1)
-                .create();
-        BaseItem item2 = new ItemFactory().build()
-                .setName("testItem2")
+                .setName("testItem1")
+                .build();
+        BaseItem item2 = BaseItem.builder()
                 .setIlvl(2)
-                .create();
+                .setName("testItem2")
+                .build();
         assertEquals("testItem1", item1.getName());
         assertEquals("testItem2", item2.getName());
     }

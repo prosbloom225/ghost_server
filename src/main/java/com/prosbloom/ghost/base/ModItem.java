@@ -2,6 +2,7 @@ package com.prosbloom.ghost.base;
 
 import com.prosbloom.ghost.lib.LibMisc;
 import com.prosbloom.rengine.base.BaseItem;
+import com.prosbloom.rengine.item.ITickable;
 
 /**
  * Created by prosbloom on 11/4/17.
@@ -9,14 +10,6 @@ import com.prosbloom.rengine.base.BaseItem;
 public class ModItem extends BaseItem {
     private boolean isVirtual;
 
-    public ModItem(String name, int ilvl) {
-        super(name, ilvl);
-    }
-
-    // all baseitem extends have to have a base constructor
-    public ModItem() {
-       super();
-    }
 
     public boolean isVirtual() {
         return isVirtual;
@@ -29,4 +22,31 @@ public class ModItem extends BaseItem {
     public void setModName() {
         this.modName = LibMisc.MODNAME;
     }
+
+
+    // Builder code and constructor
+    public static abstract class Builder<T extends ModItem> extends BaseItem.Builder<T> {
+        private boolean isVirtual;
+
+        public Builder<T> setVirtual(boolean isVirtual) {
+            this.isVirtual= isVirtual;
+            return this;
+        }
+    }
+    public static Builder<?> builder() {
+        return new Builder<ModItem>()
+        {
+            @Override
+            public ModItem build()
+            {
+                return new ModItem(this);
+            }
+        };
+    }
+
+    protected ModItem(Builder<?> builder) {
+        super(builder);
+        this.isVirtual= builder.isVirtual;
+    }
+
 }

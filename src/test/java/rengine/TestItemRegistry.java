@@ -1,7 +1,6 @@
 package rengine;
 
 import com.prosbloom.rengine.base.BaseItem;
-import com.prosbloom.rengine.factory.ItemFactory;
 import com.prosbloom.rengine.registry.ItemRegistry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,10 +20,11 @@ public class TestItemRegistry {
     @DisplayName("Test single item")
     @Test
     void testAddSingleItem() {
-       BaseItem item = new ItemFactory().build()
+       BaseItem item = BaseItem.builder()
+               .setIlvl(1)
                .setName("testItem1")
-               .create();
-        assertEquals(ItemRegistry.addItem(item), "base:testItem1");
+               .build();
+        assertEquals("base:testItem1", ItemRegistry.addItem(item));
     }
 
     @DisplayName("Add multiple items")
@@ -33,9 +33,9 @@ public class TestItemRegistry {
         int size = 100;
         BaseItem[] items = new BaseItem[size];
         for (int i=0;i<size;i++) {
-            items[i] = new ItemFactory().build()
+            items[i] = BaseItem.builder()
                     .setName("testItem" + i)
-                    .create();
+                    .build();
             ItemRegistry.addItem(items[i]);
         }
         for (int i=0;i<size;i++)
@@ -45,8 +45,8 @@ public class TestItemRegistry {
     @DisplayName("Overwrite item at id")
     @Test
     void testOverwrite() {
-        BaseItem item0 = new BaseItem("testItem0");
-        BaseItem item1 = new BaseItem("NEWtestItem0");
+        BaseItem item0 = BaseItem.builder().setName("testItem0").build();
+        BaseItem item1 = BaseItem.builder().setName("NEWtestItem0").build();
         ItemRegistry.addItem("base:testItem0", item0);
         ItemRegistry.addItem("base:testItem0", item1);
         assertEquals(ItemRegistry.getItem("base:testItem0").getName(), item1.getName());
@@ -56,7 +56,7 @@ public class TestItemRegistry {
     @Test
     void testInstance() {
         // add default item
-        BaseItem item0 = new BaseItem("testItem0");
+        BaseItem item0 = BaseItem.builder().setName("testItem0").build();
         ItemRegistry.addItem(item0);
         // get item and modify
         BaseItem item1 = ItemRegistry.getItem("base:testItem0");
