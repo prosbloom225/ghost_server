@@ -1,6 +1,7 @@
 package rengine;
 
 import com.prosbloom.rengine.base.BaseItem;
+import com.prosbloom.rengine.factory.RandomItemFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,6 +44,14 @@ public class TestItem {
                 .build();
         assertEquals("testItem1", item1.getName());
         assertEquals("testItem2", item2.getName());
+    }
+    @DisplayName("Test basic item generation")
+    @Test
+    void TestRNGItem() {
+        RandomItemFactory factory = new RandomItemFactory();
+        BaseItem item = factory.generate(17);
+        assertEquals(17, item.getIlvl());
+        assertEquals("base", item.getModName());
     }
 
 }

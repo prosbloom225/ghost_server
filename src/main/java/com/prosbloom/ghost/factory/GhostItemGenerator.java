@@ -18,13 +18,11 @@ public class GhostItemGenerator extends RandomItemFactory {
         return item;
     }
 
-    // overloads
-    public ModItem generate(int ilvl){
-        ModItem item = createItem(ilvl);
-        return item;
+    public ModItem generate(int ilvl) {
+        return createItem(ilvl);
     }
     public ModItem generate(int ilvl, LibMisc.ITYPE type) {
-        ModItem item = generate(ilvl);
+        ModItem item = createItem(ilvl);
         switch (type) {
             case weapon:
                 break;
