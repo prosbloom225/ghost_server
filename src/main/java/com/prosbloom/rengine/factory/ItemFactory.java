@@ -11,17 +11,35 @@ public class ItemFactory {
 
     // subclass allows for multiple builders to run at same time
     public builder build() {
-        return new builder();
+        try {
+            return new builder(BaseItem.class);
+        } catch (Exception e) {
+            log.error(e.toString());
+        }
+        return null;
     }
 
-    public final class builder{
-        private BaseItem item;
+    public builder build(Class type) {
+        try {
+            return new builder(type);
+            // TODO - real exception handling
+        } catch (Exception e) {
+            log.error(e.toString());
+        }
+        return null;
+    }
 
-        public builder() {
-            item = new BaseItem();
+    public class builder<T extends BaseItem> {
+
+        private T item;
+
+        public builder(Class<T> type)
+        throws IllegalAccessException, InstantiationException {
+            item = type.newInstance();
         }
 
-        public BaseItem execute() {
+        public T create () {
+            log.debug("Creating item of type: " + item.getClass().getName() + " - " + item.getName());
             return item;
         }
 

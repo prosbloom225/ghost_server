@@ -18,12 +18,12 @@ public class TestItemRegistry {
         ItemRegistry.init();
     }
 
-    @DisplayName("Add single item")
+    @DisplayName("Test single item")
     @Test
     void testAddSingleItem() {
        BaseItem item = new ItemFactory().build()
                .setName("testItem1")
-               .execute();
+               .create();
         assertEquals(ItemRegistry.addItem(item), "base:testItem1");
     }
 
@@ -35,7 +35,7 @@ public class TestItemRegistry {
         for (int i=0;i<size;i++) {
             items[i] = new ItemFactory().build()
                     .setName("testItem" + i)
-                    .execute();
+                    .create();
             ItemRegistry.addItem(items[i]);
         }
         for (int i=0;i<size;i++)

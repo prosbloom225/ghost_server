@@ -12,6 +12,11 @@ public class ModItem extends BaseItem {
         super(name, ilvl);
     }
 
+    // all baseitem extends have to have a base constructor
+    public ModItem() {
+       super();
+    }
+
     public void setModName() {
         this.modName = LibMisc.MODNAME;
     }

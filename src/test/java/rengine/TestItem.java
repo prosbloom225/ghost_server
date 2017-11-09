@@ -11,13 +11,23 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class TestItem {
 
+    @DisplayName("Test generic item factory")
+    @Test
+    void testGenericItemFactory() {
+        ItemFactory factory = new ItemFactory();
+        BaseItem item = factory.build(BaseItem.class)
+                .setName("testItem")
+                .create();
+        assertEquals("testItem", item.getName());
+    }
+
     @DisplayName("Generate basic item")
     @Test
     void testBasicItem() {
         BaseItem item = new ItemFactory().build()
                 .setName("testItem1")
                 .setIlvl(1)
-                .execute();
+                .create();
         assertEquals("testItem1", item.getName());
     }
     @DisplayName("Generate multiple basic items")
@@ -26,11 +36,11 @@ public class TestItem {
         BaseItem item1 = new ItemFactory().build()
                 .setName("testItem1")
                 .setIlvl(1)
-                .execute();
+                .create();
         BaseItem item2 = new ItemFactory().build()
                 .setName("testItem2")
                 .setIlvl(2)
-                .execute();
+                .create();
         assertEquals("testItem1", item1.getName());
         assertEquals("testItem2", item2.getName());
     }

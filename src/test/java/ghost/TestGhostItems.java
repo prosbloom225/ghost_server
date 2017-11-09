@@ -6,6 +6,7 @@ import com.prosbloom.ghost.item.GhostDemoUniqueItem;
 import com.prosbloom.ghost.lib.LibMisc;
 import com.prosbloom.ghost.mod.ModItems;
 import com.prosbloom.rengine.base.BaseItem;
+import com.prosbloom.rengine.factory.ItemFactory;
 import com.prosbloom.rengine.registry.ItemRegistry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,6 +32,18 @@ public class TestGhostItems {
         ModItem testItem0 = new ModItem("testModItem0", 0);
         ModItems.register(testItem0);
         assertEquals("testModItem0", ItemRegistry.getItem("ghost:testModItem0").getName());
+    }
+
+    @DisplayName("Test item registry loading ModItem")
+    @Test
+    void testItemFactoryModItemLoad() {
+        BaseItem item = new ItemFactory().build(ModItem.class)
+                .setIlvl(9)
+                .setName("testItem")
+                .create();
+        ItemRegistry.addItem(item);
+        assertEquals(item.toString(), ItemRegistry.getItem("ghost:testItem").toString());
+        assertEquals("ghost", item.getModName());
     }
 
     @DisplayName("Test random mod item")
@@ -73,6 +86,7 @@ public class TestGhostItems {
     @DisplayName("Test bulk loader from json - no java backed")
     @Test
     void testBasicBulkItemLoad() {
-        ModItems.registerItems();
+        ModItems.loadItems();
+        // TODO - add these tests - this is stubbed just for dev
     }
 }

@@ -1,6 +1,7 @@
 package com.prosbloom.rengine.registry;
 
 import com.prosbloom.rengine.base.BaseItem;
+import com.prosbloom.rengine.exception.ItemNotFoundException;
 import org.apache.log4j.Logger;
 
 import java.util.LinkedHashMap;
@@ -26,6 +27,10 @@ public class ItemRegistry {
             log.warn("Tried to get nonexistent item with key: " + key);
             return null;
         }
+    }
+
+    public static int getItemRegistryCount() {
+        return items.size();
     }
 
     public static String addItem(String key, BaseItem item) {

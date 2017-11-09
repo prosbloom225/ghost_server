@@ -1,12 +1,10 @@
-{
-  "items": {
-    "GhostDemoUniqueItem": {
+[
+    {
       "name": "demoItem",
       "ilvl" : "18"
     },
-    "GhostDemoUniqueItem2": {
+    {
       "name": "demoItem2",
       "ilvl" : "2000"
     }
-  }
-}
+  ]
