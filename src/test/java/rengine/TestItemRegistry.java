@@ -1,6 +1,7 @@
 package rengine;
 
 import com.prosbloom.rengine.base.BaseItem;
+import com.prosbloom.rengine.factory.ItemBuilder;
 import com.prosbloom.rengine.factory.ItemFactory;
 import com.prosbloom.rengine.registry.ItemRegistry;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,9 +22,7 @@ public class TestItemRegistry {
     @DisplayName("Test single item")
     @Test
     void testAddSingleItem() {
-       BaseItem item = new ItemFactory().build()
-               .setName("testItem1")
-               .create();
+       BaseItem item = ItemFactory.build("testItem1").create();
         assertEquals(ItemRegistry.addItem(item), "base:testItem1");
     }
 
@@ -33,8 +32,7 @@ public class TestItemRegistry {
         int size = 100;
         BaseItem[] items = new BaseItem[size];
         for (int i=0;i<size;i++) {
-            items[i] = new ItemFactory().build()
-                    .setName("testItem" + i)
+            items[i] = ItemFactory.build("testItem" + i)
                     .create();
             ItemRegistry.addItem(items[i]);
         }

@@ -1,11 +1,13 @@
 package ghost;
 
+import com.prosbloom.ghost.factory.GhostItemFactory;
 import com.prosbloom.ghost.factory.GhostItemGenerator;
 import com.prosbloom.ghost.base.ModItem;
 import com.prosbloom.ghost.item.GhostDemoUniqueItem;
 import com.prosbloom.ghost.lib.LibMisc;
 import com.prosbloom.ghost.mod.ModItems;
 import com.prosbloom.rengine.base.BaseItem;
+import com.prosbloom.rengine.factory.ItemBuilder;
 import com.prosbloom.rengine.factory.ItemFactory;
 import com.prosbloom.rengine.registry.ItemRegistry;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,9 +39,8 @@ public class TestGhostItems {
     @DisplayName("Test item registry loading ModItem")
     @Test
     void testItemFactoryModItemLoad() {
-        BaseItem item = new ItemFactory().build(ModItem.class)
+        BaseItem item = GhostItemFactory.build("testItem")
                 .setIlvl(9)
-                .setName("testItem")
                 .create();
         ItemRegistry.addItem(item);
         assertEquals(item.toString(), ItemRegistry.getItem("ghost:testItem").toString());
