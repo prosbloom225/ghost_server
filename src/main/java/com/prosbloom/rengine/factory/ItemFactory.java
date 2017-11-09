@@ -31,7 +31,7 @@ public class ItemFactory {
 
     public class builder<T extends BaseItem> {
 
-        private T item;
+        protected T item;
 
         public builder(Class<T> type)
         throws IllegalAccessException, InstantiationException {
