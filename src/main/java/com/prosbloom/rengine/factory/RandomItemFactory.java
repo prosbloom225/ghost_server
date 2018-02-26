@@ -37,7 +37,7 @@ public class RandomItemFactory {
                names.bases[r.nextInt(names.bases.length)],
                names.preposition,
                names.suffixes[r.nextInt(names.suffixes.length)]);
-       log.error("NAME: " + name);
+       log.info("RNG NAME: " + name);
        return name;
     }
 

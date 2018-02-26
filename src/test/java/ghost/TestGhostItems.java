@@ -87,7 +87,7 @@ public class TestGhostItems {
     @DisplayName("Test bulk loader from json - no java backed")
     @Test
     void testBasicBulkItemLoad() {
-        ModItems.loadItems();
+        ModItems.loadUniqueItems();
         // TODO - add these tests - this is stubbed just for dev
     }
 }

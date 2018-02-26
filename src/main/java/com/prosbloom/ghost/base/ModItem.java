@@ -23,6 +23,14 @@ public class ModItem extends BaseItem {
         this.modName = LibMisc.MODNAME;
     }
 
+    @Override
+    public String toString() {
+        return "ModItem{" +
+                "name=" + name +
+                "ilvl=" + ilvl +
+                "isVirtual=" + isVirtual +
+                '}';
+    }
 
     // Builder code and constructor
     public static abstract class Builder<T extends ModItem> extends BaseItem.Builder<T> {
@@ -33,6 +41,7 @@ public class ModItem extends BaseItem {
             return this;
         }
     }
+
     public static Builder<?> builder() {
         return new Builder<ModItem>()
         {

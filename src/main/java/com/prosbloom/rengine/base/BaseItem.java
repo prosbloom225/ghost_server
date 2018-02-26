@@ -10,7 +10,7 @@ import java.io.*;
 public class BaseItem extends BaseEntity {
     final static Logger log = Logger.getLogger(BaseItem.class.getName());
 
-    private int ilvl = 0;
+    protected int ilvl = 0;
 
     public String getModName() {
         return modName;

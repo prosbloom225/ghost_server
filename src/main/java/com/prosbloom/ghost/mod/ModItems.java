@@ -18,17 +18,19 @@ public class ModItems {
     final static Logger log = Logger.getLogger(ModItems.class.getName());
 
     public static void register(ModItem item) {
+        log.info("Registering item: " + item.toString());
         ItemRegistry.addItem(item);
     }
     // TODO - no overloads should be required for register
     public static void register(BaseItem item) {
+        log.info("Registering item: " + item.toString());
         ItemRegistry.addItem(item);
     }
     public static void registerItems(){
         // add all items to the registry
     }
 
-    public  static void loadItems() {
+    public  static void loadUniqueItems() {
 
         try {
             File f = new File(ModItems.class.getClassLoader().getResource("ghost/item/Uniques.json").getPath());
@@ -39,7 +41,8 @@ public class ModItems {
              ModItemModel[] json = om.readValue(f, ModItemModel[].class);
              for (ModItemModel model : json) {
                  log.debug("model loaded from json: " + model.getName());
-                 BaseItem item = BaseItem.builder()
+                 ModItem item = ModItem.builder()
+                         .setVirtual(model.isVirtual())
                          .setIlvl(model.getIlvl())
                          .setName(model.getName())
                          .build();
@@ -48,15 +51,6 @@ public class ModItems {
         } catch (IOException  e)  {
             log.error(e.toString());
         }
-    }
-
-    private static ModItem loadItemFromJson(Map<String, String> json) {
-        // handle nonjava backed items first
-        ModItem item = ModItem.builder()
-                .setIlvl(0)
-                .setName("")
-                .build();
-        return item;
     }
 }
 
