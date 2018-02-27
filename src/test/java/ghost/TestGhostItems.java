@@ -5,6 +5,7 @@ import com.prosbloom.ghost.base.ModItem;
 import com.prosbloom.ghost.item.GhostDemoUniqueItem;
 import com.prosbloom.ghost.lib.LibMisc;
 import com.prosbloom.ghost.mod.ModItems;
+import com.prosbloom.rengine.exception.ItemNotFoundException;
 import com.prosbloom.rengine.base.BaseItem;
 import com.prosbloom.rengine.registry.ItemRegistry;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +34,10 @@ public class TestGhostItems {
                 .setName("testModItem0")
                 .build();
         ModItems.register(testItem0);
+        try {
         assertEquals("testModItem0", ItemRegistry.getItem("ghost:testModItem0").getName());
+        } catch (ItemNotFoundException e) {
+        }
     }
 
     @DisplayName("Test item registry direct loading ModItem")
@@ -44,8 +48,11 @@ public class TestGhostItems {
                 .setName("testItem")
                 .build();
         ItemRegistry.addItem(item);
+        try {
         assertEquals(item.toString(), ItemRegistry.getItem("ghost:testItem").toString());
         assertEquals("ghost", item.getModName());
+        } catch (ItemNotFoundException e) {
+        }
     }
 
     @DisplayName("Test random mod item")

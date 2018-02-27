@@ -2,13 +2,12 @@ package com.prosbloom.ghost.base;
 
 import com.prosbloom.ghost.lib.LibMisc;
 import com.prosbloom.rengine.base.BaseItem;
-import com.prosbloom.rengine.item.ITickable;
 
 /**
  * Created by prosbloom on 11/4/17.
  */
 public class ModItem extends BaseItem {
-    private boolean isVirtual;
+    protected boolean isVirtual;
 
 
     public boolean isVirtual() {

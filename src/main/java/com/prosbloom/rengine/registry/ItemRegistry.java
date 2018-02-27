@@ -20,7 +20,8 @@ public class ItemRegistry {
         items = new LinkedHashMap<String, BaseItem>();
     }
 
-    public static BaseItem getItem(String key) {
+    public static BaseItem getItem(String key) 
+    throws ItemNotFoundException {
         try {
             return items.get(key).clone();
         } catch (IndexOutOfBoundsException e) {

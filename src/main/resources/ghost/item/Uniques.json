@@ -1,11 +1,11 @@
 [
     {
-      "name": "demoItem",
+      "name": "uniqueItem",
       "ilvl" : "18",
       "virtual" : false
     },
     {
-      "name": "demoItem2",
+      "name": "uniqueItem2",
       "ilvl" : "2000",
       "virtual" : false
     }
