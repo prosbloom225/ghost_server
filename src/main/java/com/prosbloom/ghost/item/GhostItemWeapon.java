@@ -10,11 +10,14 @@ import org.apache.log4j.Logger;
  */
 public class GhostItemWeapon extends ModItem implements IItemWeapon {
     final static Logger log = Logger.getLogger(GhostItemWeapon.class.getName());
-    int ap = 0;
+    double ap = 1;
 
 
-    public double getWeaponAp() {
+    public double getAp() {
         return this.ap;
+    }
+    public void setAp(double ap) {
+        this.ap = ap;
     }
 
     @Override
@@ -28,10 +31,10 @@ public class GhostItemWeapon extends ModItem implements IItemWeapon {
 
     // Builder code and constructor
     public static abstract class Builder<T extends GhostItemWeapon> extends ModItem.Builder<T> {
-        private boolean isVirtual;
+        private double ap;
 
-        public Builder<T> setVirtual(boolean isVirtual) {
-            this.isVirtual= isVirtual;
+        public Builder<T> setAp(double ap) {
+            this.ap= ap;
             return this;
         }
     }
@@ -49,7 +52,7 @@ public class GhostItemWeapon extends ModItem implements IItemWeapon {
 
     protected GhostItemWeapon(Builder<?> builder) {
         super(builder);
-        this.isVirtual= builder.isVirtual;
+        this.ap = builder.ap;
     }
 
 }

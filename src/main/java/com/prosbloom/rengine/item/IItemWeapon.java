@@ -7,5 +7,5 @@ public interface IItemWeapon {
     public double ap = 0;
     public double apScaler = 1.0;
 
-    public double getWeaponAp();
+    public double getAp();
 }

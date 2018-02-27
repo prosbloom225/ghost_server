@@ -3,6 +3,7 @@ package ghost;
 import com.prosbloom.ghost.factory.GhostItemGenerator;
 import com.prosbloom.ghost.base.ModItem;
 import com.prosbloom.ghost.item.GhostDemoUniqueItem;
+import com.prosbloom.ghost.item.GhostItemWeapon;
 import com.prosbloom.ghost.lib.LibMisc;
 import com.prosbloom.ghost.mod.ModItems;
 import com.prosbloom.rengine.exception.ItemNotFoundException;
@@ -65,13 +66,28 @@ public class TestGhostItems {
         assertEquals(17, item.getIlvl());
     }
 
+    @DisplayName("Test weapon interface")
+    @Test
+    void testBaseWeapon() {
+        GhostItemWeapon item = GhostItemWeapon.builder()
+            .setAp(1.0)
+            .setIlvl(1)
+            .setName("testWeapon")
+            .build();
+        // check weapon properties
+        assertEquals(1, item.getIlvl());
+        // assertEquals(1.0, item.getAp());
+        // TODO - add weapon properties
+    }
+
     @DisplayName("Test random weapon")
     @Test
     void testRandomWeapon() {
         GhostItemGenerator gig = new GhostItemGenerator();
-        BaseItem item = gig.generate(17, LibMisc.ITYPE.weapon);
+        GhostItemWeapon item = (GhostItemWeapon)gig.generate(17, LibMisc.ITYPE.weapon);
         // check weapon properties
         assertEquals(17, item.getIlvl());
+        assertEquals(1.0, item.getAp());
         // TODO - add weapon properties
     }
 
