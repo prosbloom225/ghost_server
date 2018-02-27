@@ -28,7 +28,7 @@ public class Game {
        lifecycle();
    }
 
-   private static void loader() {
+   public static void loader() {
        // TODO - load mods as generics
        // for now hardcoding
        mods = new Mod[2];
@@ -62,7 +62,7 @@ public class Game {
             mod.postinit();
     }
 
-    private static void lifecycle(){
+    public static void lifecycle(){
         int tick = 0;
         int maxTicks = 10;
         // main game loop
@@ -72,6 +72,10 @@ public class Game {
             // world server actions tick
             for (IAction action : stack) {
             }
+
+            // world server entities tick
+            // updateTrackedEntities - dead/alive, gc, etc
+            // sync??
         }
     }
 }

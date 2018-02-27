@@ -12,8 +12,16 @@ public class TestGame {
 
     @DisplayName("Test Game construction")
     @Test
-    void testGenericItemFactory() {
+    void testGameConstruction() {
         Game game = new Game();
+        // assertEquals("testItem", item.getName());
+    }
+
+    @DisplayName("Test Game loader")
+    @Test
+    void testGameLoader() {
+        Game game = new Game();
+        game.loader();
         // assertEquals("testItem", item.getName());
     }
 }
