@@ -2,13 +2,12 @@ package com.prosbloom.ghost.base;
 
 import com.prosbloom.ghost.lib.LibMisc;
 import com.prosbloom.rengine.base.BaseItem;
-import com.prosbloom.rengine.item.ITickable;
 
 /**
  * Created by prosbloom on 11/4/17.
  */
 public class ModItem extends BaseItem {
-    private boolean isVirtual;
+    protected boolean isVirtual;
 
 
     public boolean isVirtual() {
@@ -23,6 +22,14 @@ public class ModItem extends BaseItem {
         this.modName = LibMisc.MODNAME;
     }
 
+    @Override
+    public String toString() {
+        return "ModItem{" +
+                "name=" + name +
+                "ilvl=" + ilvl +
+                "isVirtual=" + isVirtual +
+                '}';
+    }
 
     // Builder code and constructor
     public static abstract class Builder<T extends ModItem> extends BaseItem.Builder<T> {
@@ -33,6 +40,7 @@ public class ModItem extends BaseItem {
             return this;
         }
     }
+
     public static Builder<?> builder() {
         return new Builder<ModItem>()
         {

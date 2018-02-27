@@ -2,6 +2,7 @@ package rengine;
 
 import com.prosbloom.rengine.base.BaseItem;
 import com.prosbloom.rengine.registry.ItemRegistry;
+import com.prosbloom.rengine.exception.ItemNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,10 @@ public class TestItemRegistry {
             ItemRegistry.addItem(items[i]);
         }
         for (int i=0;i<size;i++)
+            try {
             assertEquals(ItemRegistry.getItem("base:testItem" + i).getName(), items[i].getName());
+             } catch (ItemNotFoundException e) {
+             }
     }
 
     @DisplayName("Overwrite item at id")
@@ -49,7 +53,10 @@ public class TestItemRegistry {
         BaseItem item1 = BaseItem.builder().setName("NEWtestItem0").build();
         ItemRegistry.addItem("base:testItem0", item0);
         ItemRegistry.addItem("base:testItem0", item1);
+        try {
         assertEquals(ItemRegistry.getItem("base:testItem0").getName(), item1.getName());
+        } catch (ItemNotFoundException e) {
+        }
     }
 
     @DisplayName("Check item instancing")
@@ -58,10 +65,13 @@ public class TestItemRegistry {
         // add default item
         BaseItem item0 = BaseItem.builder().setName("testItem0").build();
         ItemRegistry.addItem(item0);
+        try {
         // get item and modify
         BaseItem item1 = ItemRegistry.getItem("base:testItem0");
         item1.setName("test");
         // check for unmodified
         assertEquals("testItem0", ItemRegistry.getItem("base:testItem0").getName());
+        } catch (ItemNotFoundException e) {
+        }
     }
 }

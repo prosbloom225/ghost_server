@@ -1,6 +1,8 @@
 package com.prosbloom.ghost.factory;
 
 import com.prosbloom.ghost.base.ModItem;
+import com.prosbloom.ghost.item.GhostItemWeapon;
+import com.prosbloom.ghost.item.GhostItemArmor;
 import com.prosbloom.ghost.lib.LibMisc;
 import com.prosbloom.rengine.base.BaseItem;
 import com.prosbloom.rengine.factory.RandomItemFactory;
@@ -18,17 +20,26 @@ public class GhostItemGenerator extends RandomItemFactory {
         return item;
     }
 
-    // overloads
-    public ModItem generate(int ilvl){
-        ModItem item = createItem(ilvl);
-        return item;
+    public ModItem generate(int ilvl) {
+        return createItem(ilvl);
     }
     public ModItem generate(int ilvl, LibMisc.ITYPE type) {
-        ModItem item = generate(ilvl);
+        ModItem item = createItem(ilvl);
         switch (type) {
             case weapon:
+                item = GhostItemWeapon.builder()
+                .setAp(1.0)
+                .setIlvl(ilvl)
+                .setName("rngItem")
+                .build();
                 break;
             case armor:
+                item = GhostItemArmor.builder()
+                .setDv(1.0)
+                .setPv(1.0)
+                .setIlvl(ilvl)
+                .setName("rngItem")
+                .build();
                 break;
             default:
                 // other

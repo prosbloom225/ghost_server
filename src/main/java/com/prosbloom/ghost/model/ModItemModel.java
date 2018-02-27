@@ -4,8 +4,9 @@ package com.prosbloom.ghost.model;
  * Created by prosbloom on 11/8/17.
  */
 public class ModItemModel {
-    public String name;
-    public int ilvl;
+    private String name;
+    private int ilvl;
+    private boolean virtual;
 
     public String getName() {
         return name;
@@ -23,4 +24,11 @@ public class ModItemModel {
         this.ilvl = ilvl;
     }
 
+    public boolean isVirtual() {
+        return virtual;
+    }
+
+    public void setVirtual(boolean virtual) {
+        this.virtual = virtual;
+    }
 }

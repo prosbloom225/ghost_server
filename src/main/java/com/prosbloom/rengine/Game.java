@@ -2,8 +2,11 @@ package com.prosbloom.rengine;
 
 import com.prosbloom.rengine.mod.Mod;
 import com.prosbloom.rengine.mod.Player;
+import com.prosbloom.rengine.base.BaseMod;
 import com.prosbloom.rengine.registry.EntityRegistry;
 import com.prosbloom.rengine.registry.ItemRegistry;
+
+import com.prosbloom.ghost.GhostMod;
 
 /**
  * Created by prosbloom on 11/4/17.
@@ -20,6 +23,13 @@ public class Game {
        // initialize registries
        ItemRegistry.init();
        EntityRegistry.init();
+
+
+       // TODO - load mods as generics
+       // for now hardcoding
+       mods = new Mod[2];
+       mods[0] = new BaseMod();
+       mods[1] = new GhostMod();
 
        // loader phases
        preinit();

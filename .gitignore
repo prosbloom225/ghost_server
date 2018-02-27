@@ -3,4 +3,4 @@ target/
 .idea/
 *.log
 *.out
-*.iml
+node_modules/
