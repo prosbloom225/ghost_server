@@ -1,25 +1,22 @@
 package com.prosbloom.rengine.base;
 
 import java.io.*;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by prosbloom on 11/4/17.
  */
 public class BaseEntity implements Serializable{
 
-    protected String name;
-    protected String modName;
+    @Getter @Setter protected String name;
+    @Getter protected String modName;
 
-    public String getModName() {
-        return modName;
-    }
+    @Getter @Setter private double maxHp;
+    @Getter @Setter private double hp;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setModName() {
+        this.modName = "";
     }
 
     public BaseEntity(String name) {
@@ -27,9 +24,6 @@ public class BaseEntity implements Serializable{
         setModName();
     }
 
-    public void setModName() {
-        this.modName = "";
-    };
 
     public BaseItem clone() {
         try {
@@ -50,9 +44,19 @@ public class BaseEntity implements Serializable{
 
     public static abstract class Builder<T extends BaseEntity> {
         private String name;
+        private double hp;
+        private double maxHp;
 
         public Builder<T> setName(String name) {
             this.name= name;
+            return this;
+        }
+        public Builder<T> setHp(double hp) {
+            this.hp= hp;
+            return this;
+        }
+        public Builder<T> setMaxHp(double maxHp) {
+            this.maxHp = maxHp;
             return this;
         }
         public abstract T build();
@@ -71,6 +75,8 @@ public class BaseEntity implements Serializable{
 
     protected BaseEntity(Builder<?> builder) {
         this.name = builder.name;
+        this.hp = builder.hp;
+        this.maxHp = builder.maxHp;
         setModName();
     }
 }

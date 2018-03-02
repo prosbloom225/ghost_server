@@ -11,7 +11,7 @@ public class Attack implements IAction {
     public void onTick(){}
 
     public void execute(){
-        defender.setHp = defender.getHp() - attacker.getAp();
+        defender.setHp(defender.getHp() - attacker.getAp());
     }
 
 }
