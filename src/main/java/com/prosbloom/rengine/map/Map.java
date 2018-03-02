@@ -26,6 +26,20 @@ public class Map {
         map[x][y].setEntity(entity);
     }
 
+    public boolean canMove(int x, int y, int xx, int yy) {
+        return map[xx][yy].isEmpty();
+    }
+
+    public boolean moveEntity(int x, int y, int xx, int yy) {
+        if (canMove(x, y, xx, yy)) {
+            map[xx][yy].setEntity(map[x][y].getEntity());
+            map[x][y].setEntity(null);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public String dumpMap() {
         return Arrays.deepToString(map); 
     }

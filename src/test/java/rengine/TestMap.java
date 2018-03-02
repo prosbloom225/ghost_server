@@ -1,6 +1,7 @@
 package rengine;
 
 import com.prosbloom.rengine.base.BaseEntity;
+import com.prosbloom.rengine.base.BaseEntity;
 import com.prosbloom.rengine.map.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,5 +40,24 @@ public class TestMap {
         map.setEntityAtSlot(1,1,entityTwo);
 
         assertEquals("entityTwo", map.getEntityAtSlot(1,1).getName());
+    }
+    @DisplayName("Test moving entity")
+    @Test
+    void testMovingEntity() {
+        Map map = new Map();
+        BaseEntity entityOne = BaseEntity.builder()
+            .setName("entityOne")
+            .build();
+        BaseEntity entityTwo = BaseEntity.builder()
+            .setName("entityTwo")
+            .build();
+
+        map.setEntityAtSlot(0,0,entityOne);
+        map.setEntityAtSlot(0,1,entityTwo);
+        // check overwrite
+        assertEquals(false, map.moveEntity(0,0,0,1));
+        // positive test
+        assertEquals(true, map.moveEntity(0,0,1,1));
+
     }
 }
