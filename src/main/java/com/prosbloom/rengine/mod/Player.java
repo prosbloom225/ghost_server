@@ -28,7 +28,7 @@ public class Player extends BaseCreature implements IAttacker {
 
     // IAttacker
     public double getAp() {
-        return 0;
+        return 10;
     }
 
     // Builder code and constructor

@@ -3,7 +3,6 @@ package com.prosbloom.rengine.base;
 import com.prosbloom.ghost.lib.LibMisc;
 import com.prosbloom.rengine.base.BaseEntity;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
