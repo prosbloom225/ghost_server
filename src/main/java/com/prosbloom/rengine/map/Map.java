@@ -2,6 +2,8 @@ package com.prosbloom.rengine.map;
 
 import com.prosbloom.rengine.base.BaseEntity;
 import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Map {
 
@@ -46,5 +48,17 @@ public class Map {
 
     public String dumpMap() {
         return Arrays.deepToString(map); 
+    }
+
+    public List<BaseEntity> getEntities() {
+        List<BaseEntity> entities = new ArrayList<BaseEntity>();
+        for (int i=0;i<width;i++){
+            for (int j=0;j<height;j++) {
+                if (!map[i][j].isEmpty()){
+                    entities.add(map[i][j].getEntity());
+                }
+            }
+        }
+        return entities;
     }
 }
