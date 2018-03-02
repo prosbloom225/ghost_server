@@ -1,11 +1,12 @@
 package com.prosbloom.rengine.mod;
 
 import com.prosbloom.rengine.base.BaseEntity;
+import com.prosbloom.rengine.actions.IAttacker;
 
 /**
  * Created by prosbloom on 11/4/17.
  */
-public class Player extends BaseEntity{
+public class Player extends BaseEntity implements IAttacker{
 
     private int maxhp;
     private int maxmp;
@@ -21,6 +22,10 @@ public class Player extends BaseEntity{
         super(name);
         this.maxhp = maxhp;
         this.maxmp = maxmp;
+    }
+
+    public double getAp() {
+        return 0;
     }
 
 }
