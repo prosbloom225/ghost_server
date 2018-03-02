@@ -3,6 +3,8 @@ package com.prosbloom.rengine.base;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by prosbloom on 11/4/17.
@@ -10,7 +12,8 @@ import java.io.*;
 public class BaseItem extends BaseEntity {
     final static Logger log = Logger.getLogger(BaseItem.class.getName());
 
-    protected int ilvl = 0;
+    @Getter @Setter protected int ilvl = 0;
+    @Getter @Setter protected int weight =0;
 
     public String getModName() {
         return modName;
@@ -29,14 +32,6 @@ public class BaseItem extends BaseEntity {
         this.modName = "base";
     }
 
-    public int getIlvl() {
-        return ilvl;
-    }
-
-    public void setIlvl(int ilvl) {
-        this.ilvl = ilvl;
-    }
-
     @Override
     public String toString() {
         return "BaseItem{" +
@@ -49,9 +44,14 @@ public class BaseItem extends BaseEntity {
     // Builder code and constructor
     public static abstract class Builder<T extends BaseItem> extends BaseEntity.Builder<T> {
         private int ilvl;
+        private int weight;
 
         public Builder<T> setIlvl(int ilvl) {
             this.ilvl= ilvl;
+            return this;
+        }
+        public Builder<T> setWeight(int weight) {
+            this.weight = weight;
             return this;
         }
     }
@@ -69,6 +69,7 @@ public class BaseItem extends BaseEntity {
     protected BaseItem(Builder<?> builder) {
         super(builder);
         this.ilvl= builder.ilvl;
+        this.weight = builder.weight;
     }
 }
 

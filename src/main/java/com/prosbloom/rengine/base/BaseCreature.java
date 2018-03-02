@@ -2,6 +2,7 @@ package com.prosbloom.rengine.base;
 
 import com.prosbloom.ghost.lib.LibMisc;
 import com.prosbloom.rengine.base.BaseEntity;
+import com.prosbloom.rengine.inventory.Inventory;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ public class BaseCreature extends BaseEntity {
     // Core
     @Getter @Setter protected int xp;
     @Getter @Setter protected int level;
+    @Getter @Setter protected Inventory inventory;
 
     // Stats
     @Getter @Setter protected int strength;
@@ -35,6 +37,7 @@ public class BaseCreature extends BaseEntity {
     // Core
     private int xp;
     private int level;
+    private Inventory inventory;
 
     // Stats
     private int strength;
@@ -91,6 +94,7 @@ public class BaseCreature extends BaseEntity {
 
     protected BaseCreature(Builder<?> builder) {
         super(builder);
+        this.inventory = new Inventory(true);
         this.xp = builder.xp;
         this.level = builder.level;
         this.strength = builder.strength;
