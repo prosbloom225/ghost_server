@@ -44,7 +44,11 @@ public class Game {
    }
 
    private static void preinit(){
-        player = new Player("Player", 10, 10);
+        player = Player.builder()
+            .setHp(10)
+            .setMaxHp(10)
+            .setName("player")
+            .build();
         // initialize registries
         ItemRegistry.init();
         EntityRegistry.init();
