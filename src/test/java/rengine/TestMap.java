@@ -54,8 +54,9 @@ public class TestMap {
 
         map.setEntityAtSlot(0,0,entityOne);
         map.setEntityAtSlot(0,1,entityTwo);
-        // check overwrite
+        // negative test 
         assertEquals(false, map.moveEntity(0,0,0,1));
+        assertEquals(false, map.moveEntity(0,0,111,111));
         // positive test
         assertEquals(true, map.moveEntity(0,0,1,1));
 

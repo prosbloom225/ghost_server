@@ -27,7 +27,11 @@ public class Map {
     }
 
     public boolean canMove(int x, int y, int xx, int yy) {
-        return map[xx][yy].isEmpty();
+        try {
+            return map[xx][yy].isEmpty();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public boolean moveEntity(int x, int y, int xx, int yy) {
