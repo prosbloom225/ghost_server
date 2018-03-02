@@ -39,6 +39,15 @@ public class TestMap {
 
         assertEquals(1, entities.size());
         assertEquals("entityOne", entities.get(0).getName());
+
+
+        BaseEntity entityTwo = BaseEntity.builder()
+            .setName("entityTwo")
+            .build();
+        map.setEntityAtSlot(1,2,entityOne);
+        entities = map.getEntities();
+        assertEquals(2, entities.size());
+
     }
 
     @DisplayName("Test Map entity collision")
