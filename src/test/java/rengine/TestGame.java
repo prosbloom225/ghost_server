@@ -19,9 +19,16 @@ public class TestGame {
 
     @DisplayName("Test Game loader")
     @Test
-    void testGameLoader() {
+    void testGameLoader() throws InterruptedException {
         Game game = new Game();
-        game.loader();
+        Thread gameThread = new Thread(game);
+        gameThread.start();
+        // wait for initialization
+        do {
+            gameThread.join(1000);
+        } while (game.getTick() < 3);
+
+        // game.loader();
         // assertEquals("testItem", item.getName());
     }
 }
