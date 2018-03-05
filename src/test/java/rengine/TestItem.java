@@ -15,10 +15,12 @@ public class TestItem {
     @Test
     void testGenericItemFactory() {
         BaseItem item = BaseItem.builder()
+                .setWeight(2)
                 .setName("testItem")
                 .build();
 
         assertEquals("testItem", item.getName());
+        assertEquals(2, item.getWeight());
     }
 
     @DisplayName("Generate basic item")

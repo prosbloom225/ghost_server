@@ -1,6 +1,7 @@
 package rengine;
 
 import com.prosbloom.rengine.base.BaseCreature;
+import com.prosbloom.rengine.base.BaseItem;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,4 +38,22 @@ public class TestPlayer {
         assertEquals(16, creatureOne.getCharisma());
     }
 
+    @DisplayName("Test Creature Inventory")
+    @Test
+    void testCreatureInventory() {
+        BaseCreature creatureOne = BaseCreature.builder()
+            .setName("creatureOne")
+            .build();
+	BaseItem itemOne = BaseItem.builder()
+		.setWeight(2)
+		.build();
+	BaseItem itemTwo = BaseItem.builder()
+		.setWeight(4)
+		.build();
+	creatureOne.getInventory().addItem(itemOne);
+	creatureOne.getInventory().addItem(itemTwo);
+
+	assertEquals(6, creatureOne.getInventory().getWeight());
+
+    }
 }
