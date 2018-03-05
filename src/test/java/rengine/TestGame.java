@@ -14,7 +14,7 @@ public class TestGame {
     @DisplayName("Test Game construction")
     @Test
     void testGameConstruction() {
-        Game game = new Game();
+        // Game game = new Game();
         // assertEquals("testItem", item.getName());
     }
 
@@ -28,13 +28,16 @@ public class TestGame {
         do {
             gameThread.join(100);
         } while (game.getTick() < 3);
+        // put attack action on stack
         Attack attack = new Attack(game.getPlayer(), game.getMap().getEntityAtSlot(0,1));
+        Attack attackTwo = new Attack(game.getPlayer(), game.getMap().getEntityAtSlot(0,1));
         game.getStack().add(attack);
+        game.getStack().add(attackTwo);
 
-        System.out.println(game.getMap().getEntityAtSlot(0,1));
-        System.out.println(game.getMap().getEntityAtSlot(0,1).getHp());
-
+        // wait till end
         gameThread.join();
+
+        assertEquals(0, game.getMap().getEntityAtSlot(0,1).getHp());
 
     }
 }

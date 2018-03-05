@@ -18,12 +18,12 @@ public class Attack implements IAction {
     public void onTick(){
         if (++tick == 1) {
             this.execute();
-            log.info("Attack executed");
         }
     }
 
     public void execute(){
         defender.setHp(defender.getHp() - attacker.getAp());
+        log.info("Attack executed: " + defender.getName() + " now has " + defender.getHp() + " hp");
     }
 
 }

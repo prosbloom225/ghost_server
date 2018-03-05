@@ -92,11 +92,11 @@ public class Game implements Runnable {
                 log.info("Interrupt caught!");
             }
         }
-
     }
     private void testEntities() {
         if (!map.getEntities().stream()
                 .anyMatch(e->e.getName().equals("testCreatureOne"))){
+            log.info("Creating testCreatureOne");
             BaseCreature creatureOne = BaseCreature.builder()
                 .setXp(2)
                 .setLevel(2)
@@ -106,7 +106,8 @@ public class Game implements Runnable {
                 .setIntelligence(14)
                 .setWisdom(15)
                 .setCharisma(16)
-                .setName("creatureOne")
+                .setName("testCreatureOne")
+                .setHp(20)
                 .build();
             map.setEntityAtSlot(0,1, creatureOne);
                 }

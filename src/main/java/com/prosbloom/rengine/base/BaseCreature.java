@@ -27,6 +27,7 @@ public class BaseCreature extends BaseEntity {
         return "BaseCreature{" + 
             "name=" + name + 
             "level=" + level +
+            "hp=" + this.getHp() +
             "stats={" + strength + "," + constitution + "," + dexterity + "," + intelligence + "," + wisdom + "," + charisma + "}" + 
             '}';
     }
