@@ -1,6 +1,7 @@
 package rengine;
 
 import com.prosbloom.rengine.Game;
+import com.prosbloom.rengine.actions.Attack;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,10 +26,15 @@ public class TestGame {
         gameThread.start();
         // wait for initialization
         do {
-            gameThread.join(1000);
+            gameThread.join(100);
         } while (game.getTick() < 3);
+        Attack attack = new Attack(game.getPlayer(), game.getMap().getEntityAtSlot(0,1));
+        game.getStack().add(attack);
 
-        // game.loader();
-        // assertEquals("testItem", item.getName());
+        System.out.println(game.getMap().getEntityAtSlot(0,1));
+        System.out.println(game.getMap().getEntityAtSlot(0,1).getHp());
+
+        gameThread.join();
+
     }
 }

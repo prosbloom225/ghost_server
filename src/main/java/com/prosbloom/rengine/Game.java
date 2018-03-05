@@ -2,6 +2,8 @@ package com.prosbloom.rengine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import com.prosbloom.rengine.mod.Mod;
 import com.prosbloom.rengine.mod.Player;
 import com.prosbloom.rengine.base.BaseCreature;
@@ -22,11 +24,11 @@ import com.prosbloom.ghost.GhostMod;
 public class Game implements Runnable {
     final static Logger log = Logger.getLogger(Game.class.getName());
     private Mod[] mods;
-    private Player player;
-    private Map map;
+    @Getter private Player player;
+    @Getter private Map map;
     @Getter private int tick = 0;
 
-    private List<IAction> stack;
+    @Getter private BlockingQueue<IAction> stack;
 
     public Game() {
         // TODO - load mods as generics
@@ -52,7 +54,7 @@ public class Game implements Runnable {
         // initialize registries
         ItemRegistry.init();
         EntityRegistry.init();
-        stack = new ArrayList<IAction>();
+        stack = new LinkedBlockingQueue<IAction>();
 
         for (Mod mod : mods)
             mod.preinit();

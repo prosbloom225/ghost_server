@@ -3,6 +3,7 @@ package com.prosbloom.rengine.map;
 import com.prosbloom.rengine.base.BaseEntity;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 
 public class Map {
