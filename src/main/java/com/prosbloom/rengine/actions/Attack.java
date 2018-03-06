@@ -2,6 +2,7 @@ package com.prosbloom.rengine.actions;
 
 import com.prosbloom.rengine.base.BaseEntity;
 import org.apache.log4j.Logger;
+import java.util.Random;
 
 
 public class Attack implements IAction {
@@ -20,9 +21,20 @@ public class Attack implements IAction {
             this.execute();
         }
     }
-
     public void execute(){
-        defender.setHp(defender.getHp() - attacker.getAp());
+        double dmg = 0;
+        // process full mititation rolls
+        Random rng = new Random();
+        if (rng.nextInt(100) == 0) {
+            dmg = 0;
+            log.info("Attack dodged");
+        } else {
+        // welp we took some damage, how much
+        dmg = attacker.getAp() - (attacker.getAp() * (defender.getPv() / 100));
+         }
+        // execute
+        log.info("Attacking for: " + dmg);
+        defender.setHp(defender.getHp() - dmg);
         log.info("Attack executed: " + defender.getName() + " now has " + defender.getHp() + " hp");
     }
 

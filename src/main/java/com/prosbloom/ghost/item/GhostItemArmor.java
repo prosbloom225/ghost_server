@@ -4,28 +4,20 @@ import com.prosbloom.ghost.base.ModItem;
 import com.prosbloom.rengine.item.IItemArmor;
 import org.apache.log4j.Logger;
 
+import lombok.Getter;
+import lombok.Setter;
+
 
 /**
  * Created by prosbloom on 11/6/17.
  */
 public class GhostItemArmor extends ModItem implements IItemArmor {
     final static Logger log = Logger.getLogger(GhostItemArmor.class.getName());
-    double dv = 0;
-    double pv = 0;
+
+    // double dv = 0;
+    // double pv = 0;
 
 
-    public double getDv() {
-        return this.dv;
-    }
-    public void setDv(double dv) {
-        this.dv = dv;
-    }
-    public double getPv() {
-        return this.pv;
-    }
-    public void setPv(double pv) {
-        this.pv = pv;
-    }
 
     @Override
     public String toString() {
@@ -40,6 +32,7 @@ public class GhostItemArmor extends ModItem implements IItemArmor {
 
     // Builder code and constructor
     public static abstract class Builder<T extends GhostItemArmor> extends ModItem.Builder<T> {
+        /*
         private double dv;
         private double pv;
 
@@ -51,6 +44,7 @@ public class GhostItemArmor extends ModItem implements IItemArmor {
             this.pv= pv;
             return this;
         }
+        */
     }
 
     public static Builder<?> builder() {
@@ -66,8 +60,8 @@ public class GhostItemArmor extends ModItem implements IItemArmor {
 
     protected GhostItemArmor(Builder<?> builder) {
         super(builder);
-        this.dv = builder.dv;
-        this.pv = builder.pv;
+        // this.dv = builder.dv;
+        // this.pv = builder.pv;
     }
 
 }

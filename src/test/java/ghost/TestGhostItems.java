@@ -85,15 +85,15 @@ public class TestGhostItems {
     @Test
     void testBaseArmor() {
         GhostItemArmor item = GhostItemArmor.builder()
-            .setDv(8.0)
-            .setPv(7.0)
             .setIlvl(1)
+            .setDv(8)
+            .setPv(7)
             .setName("testWeapon")
             .build();
         // check weapon properties
         assertEquals(1, item.getIlvl());
-        assertEquals(8.0, item.getDv());
-        assertEquals(7.0, item.getPv());
+        assertEquals(8, item.getDv());
+        assertEquals(7, item.getPv());
         // TODO - add weapon properties
     }
 

@@ -14,9 +14,9 @@ public class GhostItemGenerator extends RandomItemFactory {
 
     private ModItem createItem(int ilvl){
         ModItem item = ModItem.builder()
-                .setIlvl(ilvl)
-                .setName("rngModItem")
-                .build();
+            .setIlvl(ilvl)
+            .setName("rngModItem")
+            .build();
         return item;
     }
 
@@ -28,18 +28,19 @@ public class GhostItemGenerator extends RandomItemFactory {
         switch (type) {
             case weapon:
                 item = GhostItemWeapon.builder()
-                .setAp(1.0)
-                .setIlvl(ilvl)
-                .setName("rngItem")
-                .build();
+                    .setAp(1.0)
+                    .setIlvl(ilvl)
+                    .setName("rngItem")
+                    .build();
                 break;
             case armor:
                 item = GhostItemArmor.builder()
-                .setDv(1.0)
-                .setPv(1.0)
-                .setIlvl(ilvl)
-                .setName("rngItem")
-                .build();
+                    .setVirtual(false)
+                    .setIlvl(ilvl)
+                    .setDv(1)
+                    .setPv(1)
+                    .setName("rngItem")
+                    .build();
                 break;
             default:
                 // other

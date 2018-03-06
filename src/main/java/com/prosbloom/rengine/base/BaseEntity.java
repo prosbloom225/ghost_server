@@ -15,6 +15,9 @@ public class BaseEntity implements Serializable{
     @Getter @Setter private double maxHp;
     @Getter @Setter private double hp;
 
+    @Getter @Setter private int pv = 0;
+    @Getter @Setter private int dv = 0;
+
     public void setModName() {
         this.modName = "";
     }
@@ -46,6 +49,8 @@ public class BaseEntity implements Serializable{
         private String name;
         private double hp;
         private double maxHp;
+        private int pv;
+        private int dv;
 
         public Builder<T> setName(String name) {
             this.name= name;
@@ -57,6 +62,14 @@ public class BaseEntity implements Serializable{
         }
         public Builder<T> setMaxHp(double maxHp) {
             this.maxHp = maxHp;
+            return this;
+        }
+        public Builder<T> setDv(int dv) {
+            this.dv = dv;
+            return this;
+        }
+        public Builder<T> setPv(int pv) {
+            this.pv = pv;
             return this;
         }
         public abstract T build();
@@ -77,6 +90,8 @@ public class BaseEntity implements Serializable{
         this.name = builder.name;
         this.hp = builder.hp;
         this.maxHp = builder.maxHp;
+        this.dv = builder.dv;
+        this.pv = builder.pv;
         setModName();
     }
 }
