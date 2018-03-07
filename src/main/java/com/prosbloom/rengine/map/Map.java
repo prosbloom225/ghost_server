@@ -16,7 +16,7 @@ public class Map {
         map = new Slot[width][height];
         for (int i=0;i<width;i++){
             for (int j=0;j<height;j++) {
-                map[i][j] = new Slot();
+                map[i][j] = new Slot(i, j);
             }
         }
     }
@@ -49,6 +49,10 @@ public class Map {
 
     public String dumpMap() {
         return Arrays.deepToString(map); 
+    }
+
+    public Slot getSlot(int x, int y) {
+        return map[x][y];
     }
 
     public List<BaseEntity> getEntities() {

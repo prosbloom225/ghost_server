@@ -4,9 +4,11 @@ import com.prosbloom.rengine.base.BaseEntity;
 
 public class Slot {
     private BaseEntity entity;
+    public int x, y;
 
-    public Slot() {
-        // System.out.println("Slot created");
+    public Slot(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
     public BaseEntity getEntity() {
         return entity;

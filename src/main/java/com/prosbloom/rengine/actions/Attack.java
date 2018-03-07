@@ -14,7 +14,7 @@ public class Attack implements IAction {
     public Attack(IAttacker attacker, BaseEntity defender){
         this.attacker = attacker;
         this.defender = defender;
-        log.info("Attack constructed");
+        log.debug("Attack constructed");
     }
     public void onTick(){
         if (++tick == 1) {
@@ -34,7 +34,8 @@ public class Attack implements IAction {
         dmg = attacker.getAp() * (1 - ((double)defender.getPv()/100));
          }
         // execute
-        log.info("Attacking for: " + dmg);
+        log.debug(this);
+        log.debug("Attacking for: " + dmg);
         defender.setHp(defender.getHp() - dmg);
         log.info("Attack executed: " + defender.getName() + " now has " + defender.getHp() + " hp");
     }

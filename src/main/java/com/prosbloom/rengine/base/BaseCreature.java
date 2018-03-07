@@ -22,6 +22,8 @@ public class BaseCreature extends BaseEntity {
     @Getter @Setter protected int wisdom;
     @Getter @Setter protected int charisma;
 
+    @Getter @Setter protected int spd;
+
     @Override
     public String toString() {
         return "BaseCreature{" + 
@@ -30,6 +32,7 @@ public class BaseCreature extends BaseEntity {
             "hp=" + this.getHp() +
             "dv=" + this.getDv() +
             "pv=" + this.getPv() + 
+            "spd=" + this.getSpd() + 
             "stats={" + strength + "," + constitution + "," + dexterity + "," + intelligence + "," + wisdom + "," + charisma + "}" + 
             '}';
     }
@@ -49,6 +52,8 @@ public class BaseCreature extends BaseEntity {
     private int intelligence;
     private int wisdom;
     private int charisma;
+
+    private int spd = 1;
 
         public Builder<T> setStrength(int strength) {
             this.strength = strength;
@@ -82,6 +87,10 @@ public class BaseCreature extends BaseEntity {
             this.charisma= charisma;
             return this;
         }
+        public Builder<T> setSpd(int spd) {
+            this.spd= spd;
+            return this;
+        }
     }
 
     public static Builder<?> builder() {
@@ -106,6 +115,7 @@ public class BaseCreature extends BaseEntity {
         this.intelligence = builder.intelligence;
         this.wisdom = builder.wisdom;
         this.charisma = builder.charisma;
+        this.spd = builder.spd;
     }
 
 }
