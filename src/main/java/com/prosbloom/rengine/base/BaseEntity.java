@@ -27,6 +27,8 @@ public class BaseEntity implements Serializable{
         setModName();
     }
 
+    public void death(){
+    }
 
     public BaseItem clone() {
         try {

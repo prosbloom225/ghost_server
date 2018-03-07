@@ -45,7 +45,7 @@ public class TestGame {
         // wait till end
         gameThread.join();
 
-        assertEquals(0, game.getMap().getEntityAtSlot(0,2).getHp());
+        assertEquals(80, game.getMap().getEntityAtSlot(0,2).getHp());
 
     }
 }

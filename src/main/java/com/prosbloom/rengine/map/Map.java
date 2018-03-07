@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
 
+import lombok.Getter;
+
 public class Map {
 
-    private int height = 10;
-    private int width = 10;
+    @Getter private int height = 10;
+    @Getter private int width = 10;
     private Slot[][] map;
 
     public Map() {

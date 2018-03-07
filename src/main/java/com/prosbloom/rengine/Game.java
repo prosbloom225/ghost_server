@@ -85,6 +85,7 @@ public class Game implements Runnable {
 
             // world server entities tick
             // updateTrackedEntities - dead/alive, gc, etc
+            GameManager.collect(this);
             // sync??
             try {
             Thread.sleep(100);
@@ -107,7 +108,7 @@ public class Game implements Runnable {
                 .setWisdom(15)
                 .setCharisma(16)
                 .setName("testCreatureOne")
-                .setHp(20)
+                .setHp(100)
                 .build();
             map.setEntityAtSlot(0,1, creatureOne);
                 }
