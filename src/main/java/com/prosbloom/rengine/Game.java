@@ -87,7 +87,7 @@ public class Game implements Runnable {
             // updateTrackedEntities - dead/alive, gc, etc
             // sync??
             try {
-            Thread.sleep(1000);
+            Thread.sleep(100);
             } catch (InterruptedException e) {
                 log.info("Interrupt caught!");
             }

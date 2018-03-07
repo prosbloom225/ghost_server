@@ -30,12 +30,18 @@ public class Attack implements IAction {
             log.info("Attack dodged");
         } else {
         // welp we took some damage, how much
-        dmg = attacker.getAp() - (attacker.getAp() * (defender.getPv() / 100));
+        // dmg = attacker.getAp() - (attacker.getAp() * (defender.getPv() / 100));
+        dmg = attacker.getAp() * (1 - ((double)defender.getPv()/100));
          }
         // execute
         log.info("Attacking for: " + dmg);
         defender.setHp(defender.getHp() - dmg);
         log.info("Attack executed: " + defender.getName() + " now has " + defender.getHp() + " hp");
+    }
+
+    @Override
+    public String toString() {
+        return "attacker: " + attacker + " - defender: " + defender;
     }
 
 }

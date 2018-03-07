@@ -24,6 +24,7 @@ public class TestActions {
         BaseCreature creature = BaseCreature.builder()
             .setHp(20)
             .setMaxHp(20)
+            .setPv(20)
             .setName("creature")
             .build();
 
@@ -31,7 +32,7 @@ public class TestActions {
 
         assertEquals("player", player.getName());
         assertEquals(10, player.getHp());
-        assertEquals(10, creature.getHp());
+        assertEquals(12, creature.getHp());
     }
 
 }
