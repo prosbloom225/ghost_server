@@ -39,13 +39,33 @@ public class TestGame {
             gameThread.join(100);
         } while (game.getTick() < 6);
         // put move action on stack
-        Move move = new Move(game.getMap().getSlot(0,1), 0, 2, game.getMap());
+        Move move = new Move(game.getMap().getSlot(0,0), 1, 0, game.getMap());
         game.getStack().add(move);
 
         // wait till end
         gameThread.join();
 
-        assertEquals(80, game.getMap().getEntityAtSlot(0,2).getHp());
+        assertEquals(80, game.getMap().getEntityAtSlot(0,1).getHp());
+        assertEquals("player", game.getMap().getEntityAtSlot(1,0).getName());
+
+    }
+    @DisplayName("Test GameManager")
+    @Test
+    void testGameManager() throws InterruptedException {
+        Game game = new Game();
+        Thread gameThread = new Thread(game);
+        gameThread.start();
+        // wait for initialization
+        do {
+            gameThread.join(100);
+        } while (game.getTick() < 3);
+
+        game.getMap().getEntityAtSlot(0,0).setHp(0);
+
+        // wait till end
+        gameThread.join();
+
+        assertEquals(null, game.getMap().getEntityAtSlot(1,0));
 
     }
 }
