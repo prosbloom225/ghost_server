@@ -1,6 +1,7 @@
 package com.prosbloom.rengine;
 
 import com.prosbloom.rengine.Game;
+import com.prosbloom.rengine.actions.IAction;
 import com.prosbloom.rengine.base.BaseEntity;
 import com.prosbloom.rengine.map.Map;
 
@@ -24,6 +25,12 @@ public class GameManager{
                 }
             }
             // stack
+            for (IAction action : game.getStack()) {
+                if (action.isDone()) {
+                    game.getStack().remove(action);
+                    log.info("Action complete: " + action);
+                }
+            }
         }
     }
 }

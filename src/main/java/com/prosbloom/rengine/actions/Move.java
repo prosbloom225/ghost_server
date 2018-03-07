@@ -12,6 +12,7 @@ public class Move implements IAction {
     private Slot slot;
     private Map map;
     private int x, y;
+    private boolean done = false;
 
     public Move(Slot slot, int x, int y, Map map){
         this.slot = slot;
@@ -29,7 +30,11 @@ public class Move implements IAction {
         log.info("Moving entity from: " + slot.x + "," + slot.y + "to: " + x + "," + y);
         if (map.canMove(slot.x, slot.y, x, y)) {
             map.moveEntity(slot.x, slot.y, x, y);
+            done = true;
         } 
         // TODO - handle failed moves
+    }
+    public boolean isDone() {
+        return done;
     }
 }

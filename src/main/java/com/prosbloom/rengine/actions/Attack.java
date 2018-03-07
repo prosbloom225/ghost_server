@@ -7,9 +7,10 @@ import java.util.Random;
 
 public class Attack implements IAction {
     final static Logger log = Logger.getLogger(Attack.class.getName());
-    IAttacker attacker;
-    BaseEntity defender;
-    int tick = 0;
+    private IAttacker attacker;
+    private BaseEntity defender;
+    private int tick = 0;
+    private boolean done = false;
 
     public Attack(IAttacker attacker, BaseEntity defender){
         this.attacker = attacker;
@@ -38,6 +39,10 @@ public class Attack implements IAction {
         log.debug("Attacking for: " + dmg);
         defender.setHp(defender.getHp() - dmg);
         log.info("Attack executed: " + defender.getName() + " now has " + defender.getHp() + " hp");
+        done = true;
+    }
+    public boolean isDone() {
+        return done;
     }
 
     @Override
