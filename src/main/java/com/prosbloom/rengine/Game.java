@@ -77,7 +77,7 @@ public class Game implements Runnable {
             log.info("Tick: " + tick);
             // world server tick
             // TODO - remove testing entites 
-            testEntities();
+            // testEntities();
             // world server actions tick
             for (IAction action : stack) {
                 action.onTick();
@@ -93,24 +93,5 @@ public class Game implements Runnable {
                 log.info("Interrupt caught!");
             }
         }
-    }
-    private void testEntities() {
-        if (!map.getEntities().stream()
-                .anyMatch(e->e.getName().equals("testCreatureOne"))){
-            log.info("Creating testCreatureOne");
-            BaseCreature creatureOne = BaseCreature.builder()
-                .setXp(2)
-                .setLevel(2)
-                .setStrength(11)
-                .setConstitution(12)
-                .setDexterity(13)
-                .setIntelligence(14)
-                .setWisdom(15)
-                .setCharisma(16)
-                .setName("testCreatureOne")
-                .setHp(100)
-                .build();
-            map.setEntityAtSlot(0,1, creatureOne);
-                }
     }
 }
