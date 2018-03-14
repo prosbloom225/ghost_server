@@ -49,5 +49,8 @@ public class Attack implements IAction {
     public String toString() {
         return "attacker: " + attacker + " - defender: " + defender;
     }
+    public String getName() {
+        return this.getClass().getName();
+    }
 
 }

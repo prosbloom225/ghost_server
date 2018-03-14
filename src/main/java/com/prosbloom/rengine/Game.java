@@ -23,7 +23,7 @@ import com.prosbloom.ghost.GhostMod;
  */
 public class Game implements Runnable {
     final static Logger log = Logger.getLogger(Game.class.getName());
-    private Mod[] mods;
+    @Getter private Mod[] mods;
     @Getter private Player player;
     @Getter private Map map;
     @Getter private int tick = 0;
