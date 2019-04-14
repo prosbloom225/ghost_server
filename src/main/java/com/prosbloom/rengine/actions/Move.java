@@ -37,4 +37,8 @@ public class Move implements IAction {
     public boolean isDone() {
         return done;
     }
+
+    public String getName() {
+        return this.getClass().getName();
+    }
 }
