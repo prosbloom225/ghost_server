@@ -13,6 +13,8 @@ public class Move implements IAction {
     private int x, y;
     private boolean done = false;
 
+    // TODO - should probably track the initiating entity
+    // if it dies, we will be moving whatever is in the slot instead
     public Move(Slot slot, int x, int y, Map map){
         this.slot = slot;
         this.x = x;

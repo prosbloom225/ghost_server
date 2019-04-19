@@ -11,6 +11,8 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import main.java.rengine.actions.Move;
+import main.java.rengine.client.RengineClient;
 import main.java.rengine.map.TileMap;
 import main.java.rengine.client.screens.GameScreen;
 
@@ -51,7 +53,10 @@ public class GameStage extends Stage {
             for (int y = 0; y < map.getHeight(); y++) {
                 if (!map.getSlot(x, y).equals(" ")) {
                     //System.out.println("Slot (" + x + "," + y + ") - " + map.getSlot(x, y).toString());
-                    TextureRegion region = textureAtlas.getRegions().get(map.getSlot(x, y).getSpriteNum());
+                    //TextureRegion region = textureAtlas.getRegions().get(map.getSlot(x, y).getSpriteNum());
+                    TextureRegion region = textureAtlas.getRegions().get(
+                            RengineClient.server.getMap().getSlot(x, y).getEntity() != null ?
+                            RengineClient.server.getMap().getSlot(x, y).getEntity().getSpriteNum() : 0);
                     Sprite sprite = new Sprite(region);
                     sprite.setPosition(x*64, y*64);
                     sprite.draw(batch);
@@ -74,6 +79,10 @@ public class GameStage extends Stage {
 
     @Override
     public boolean keyUp(int keycode) {
+        if(keycode == Input.Keys.A) {
+            RengineClient.server.getStack().add(
+                    new Move(RengineClient.server.getMap().getSlot(0,0), 1, 1, RengineClient.server.getMap()));
+        }
         if(keycode == Input.Keys.LEFT)
             camera.translate(-64,0);
         if(keycode == Input.Keys.RIGHT)

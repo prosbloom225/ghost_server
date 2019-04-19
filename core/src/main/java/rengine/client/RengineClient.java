@@ -33,7 +33,7 @@ public class RengineClient extends Game {
     public void startServer() {
         System.out.println("Begin Server thread!");
         server = new Server();
-        serverThread = new Thread(new Server());
+        serverThread = new Thread(server);
         serverThread.start();
         /*
         while (mainLoop.isAlive()){
