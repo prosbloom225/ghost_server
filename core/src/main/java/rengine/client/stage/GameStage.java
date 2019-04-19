@@ -3,7 +3,6 @@ package main.java.rengine.client.stage;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
@@ -12,9 +11,15 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import main.java.rengine.actions.Move;
+import main.java.rengine.actions.Teleport;
+import main.java.rengine.base.BaseCreature;
+import main.java.rengine.base.BaseEntity;
 import main.java.rengine.client.RengineClient;
+import main.java.rengine.map.Slot;
 import main.java.rengine.map.TileMap;
 import main.java.rengine.client.screens.GameScreen;
+
+import java.util.UUID;
 
 public class GameStage extends Stage {
     TiledMap tiledMap;
@@ -27,9 +32,8 @@ public class GameStage extends Stage {
     TileMap map;
 
     // Entities
-    Sprite playerSprite;
-    Texture playerTexture;
-    Sprite sprite;
+    // Game obj
+    UUID playerID;
 
     public GameStage(Viewport viewport) {
         super(viewport);
@@ -43,8 +47,8 @@ public class GameStage extends Stage {
         textureAtlas = new TextureAtlas(Gdx.files.internal("data/Shockbolt_64x64_01.atlas"));
         //textureRegion = textureAtlas.findRegion("0001");
         textureRegion = textureAtlas.getRegions().get(1794);
-        playerSprite = new Sprite(textureRegion);
-        map = new TileMap(16,16);
+        playerID = RengineClient.server.getPlayer().getId();
+        map = new TileMap(RengineClient.server.getMap().getWidth(), RengineClient.server.getMap().getHeight());
     }
     private void renderMap(){
         // TODO - only render visible tiles
@@ -53,7 +57,6 @@ public class GameStage extends Stage {
             for (int y = 0; y < map.getHeight(); y++) {
                 if (!map.getSlot(x, y).equals(" ")) {
                     //System.out.println("Slot (" + x + "," + y + ") - " + map.getSlot(x, y).toString());
-                    //TextureRegion region = textureAtlas.getRegions().get(map.getSlot(x, y).getSpriteNum());
                     TextureRegion region = textureAtlas.getRegions().get(
                             RengineClient.server.getMap().getSlot(x, y).getEntity() != null ?
                             RengineClient.server.getMap().getSlot(x, y).getEntity().getSpriteNum() : 0);
@@ -71,8 +74,6 @@ public class GameStage extends Stage {
         tiledMapRenderer.render();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        playerSprite.draw(batch);
-        //sprite.draw(batch);
         renderMap();
         batch.end();
     }
@@ -80,8 +81,25 @@ public class GameStage extends Stage {
     @Override
     public boolean keyUp(int keycode) {
         if(keycode == Input.Keys.A) {
-            RengineClient.server.getStack().add(
-                    new Move(RengineClient.server.getMap().getSlot(0,0), 1, 1, RengineClient.server.getMap()));
+            Slot s = RengineClient.server.getMap().findEntity(playerID);
+            RengineClient.server.getStack().add(new Teleport(RengineClient.server.getMap().findEntity(playerID), 1, 1, RengineClient.server.getMap()));
+        }
+        if(keycode == Input.Keys.S) {
+            BaseCreature creatureOne = BaseCreature.builder()
+                    .setXp(2)
+                    .setLevel(2)
+                    .setStrength(11)
+                    .setConstitution(12)
+                    .setDexterity(13)
+                    .setIntelligence(14)
+                    .setWisdom(15)
+                    .setCharisma(16)
+                    .setName("creatureOne")
+                    .setSpriteNum(512)
+                    .setHp(10)
+                    .setMaxHp(10)
+                    .build();
+            RengineClient.server.getMap().setEntityAtSlot(1, 1, creatureOne);
         }
         if(keycode == Input.Keys.LEFT)
             camera.translate(-64,0);
@@ -97,22 +115,22 @@ public class GameStage extends Stage {
             tiledMap.getLayers().get(1).setVisible(!tiledMap.getLayers().get(1).isVisible());
         // cardinal player moves
         if(keycode == Input.Keys.H)
-            playerSprite.setPosition(playerSprite.getX()-64, playerSprite.getY());
+            RengineClient.server.getStack().add(new Move(RengineClient.server.getMap().findEntity(playerID), -1, 0, RengineClient.server.getMap()));
         if(keycode == Input.Keys.J)
-            playerSprite.setPosition(playerSprite.getX(), playerSprite.getY()-64);
+            RengineClient.server.getStack().add(new Move(RengineClient.server.getMap().findEntity(playerID), 0, -1, RengineClient.server.getMap()));
         if(keycode == Input.Keys.K)
-            playerSprite.setPosition(playerSprite.getX(), playerSprite.getY()+64);
+            RengineClient.server.getStack().add(new Move(RengineClient.server.getMap().findEntity(playerID), 0, 1, RengineClient.server.getMap()));
         if(keycode == Input.Keys.L)
-            playerSprite.setPosition(playerSprite.getX()+64, playerSprite.getY());
+            RengineClient.server.getStack().add(new Move(RengineClient.server.getMap().findEntity(playerID), 1, 0, RengineClient.server.getMap()));
         // diagonal player moves
         if(keycode == Input.Keys.Y)
-            playerSprite.setPosition(playerSprite.getX()-64, playerSprite.getY()+64);
+            RengineClient.server.getStack().add(new Move(RengineClient.server.getMap().findEntity(playerID), -1, 1, RengineClient.server.getMap()));
         if(keycode == Input.Keys.U)
-            playerSprite.setPosition(playerSprite.getX()+64, playerSprite.getY()+64);
+            RengineClient.server.getStack().add(new Move(RengineClient.server.getMap().findEntity(playerID), 1, 1, RengineClient.server.getMap()));
         if(keycode == Input.Keys.N)
-            playerSprite.setPosition(playerSprite.getX()-64, playerSprite.getY()-64);
+            RengineClient.server.getStack().add(new Move(RengineClient.server.getMap().findEntity(playerID), -1, -1, RengineClient.server.getMap()));
         if(keycode == Input.Keys.M)
-            playerSprite.setPosition(playerSprite.getX()+64, playerSprite.getY()-64);
+            RengineClient.server.getStack().add(new Move(RengineClient.server.getMap().findEntity(playerID), 1, -1, RengineClient.server.getMap()));
         return false;
     }
 

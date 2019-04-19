@@ -1,7 +1,7 @@
 package rengine;
 
 import main.java.rengine.actions.Attack;
-import main.java.rengine.actions.Move;
+import main.java.rengine.actions.Teleport;
 import main.java.rengine.base.BaseCreature;
 import main.java.rengine.map.Map;
 import main.java.rengine.mod.Player;
@@ -37,9 +37,9 @@ public class TestActions {
         assertEquals(12, creature.getHp());
     }
 
-    @DisplayName("Test Move")
+    @DisplayName("Test Teleport")
     @Test
-    void testMove() {
+    void testTeleport() {
         Map map = new Map();
         Player player = Player.builder()
             .setHp(10)
@@ -47,7 +47,7 @@ public class TestActions {
             .setName("player")
             .build();
         map.setEntityAtSlot(0,0, player);
-        new Move(map.getSlot(0,0), 1, 0, map).execute();
+        new Teleport(map.getSlot(0,0), 1, 0, map).execute();
 
         assertEquals(player, map.getSlot(1,0).getEntity());
     }

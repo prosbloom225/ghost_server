@@ -1,6 +1,8 @@
 package main.java.rengine.base;
 
 import java.io.*;
+import java.util.UUID;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +13,8 @@ public class BaseEntity implements Serializable{
 
     @Getter @Setter protected String name;
     @Getter protected String modName;
+
+    @Getter UUID id = UUID.randomUUID();
 
     @Getter @Setter private int spriteNum;
 

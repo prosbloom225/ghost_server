@@ -5,8 +5,8 @@ import main.java.rengine.map.Slot;
 import org.apache.log4j.Logger;
 
 
-public class Move implements IAction {
-    final static Logger log = Logger.getLogger(Move.class.getName());
+public class Teleport implements IAction {
+    final static Logger log = Logger.getLogger(Teleport.class.getName());
     private int tick = 0;
     private Slot slot;
     private Map map;
@@ -15,10 +15,10 @@ public class Move implements IAction {
 
     // TODO - should probably track the initiating entity
     // if it dies, we will be moving whatever is in the slot instead
-    public Move(Slot slot, int x, int y, Map map){
+    public Teleport(Slot slot, int x, int y, Map map){
         this.slot = slot;
-        this.x = slot.x + x;
-        this.y = slot.y + y;
+        this.x = x;
+        this.y = y;
         this.map = map;
     }
 
@@ -28,7 +28,7 @@ public class Move implements IAction {
         }
     }
     public void execute() {
-        log.info("Moving entity from: " + slot.x + "," + slot.y + "to: " + x + "," + y);
+        log.info("Teleporting entity from: " + slot.x + "," + slot.y + "to: " + x + "," + y);
         if (map.canMove(slot.x, slot.y, x, y)) {
             map.moveEntity(slot.x, slot.y, x, y);
             done = true;

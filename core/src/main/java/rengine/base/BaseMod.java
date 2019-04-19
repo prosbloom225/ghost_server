@@ -1,7 +1,7 @@
 package main.java.rengine.base;
 
 import main.java.rengine.mod.Mod;
-import main.java.rengine.actions.Move;
+import main.java.rengine.actions.Teleport;
 import main.java.rengine.actions.Attack;
 import main.java.rengine.mod.PlayerActions;
 import org.apache.log4j.Logger;
@@ -17,7 +17,7 @@ public class BaseMod extends Mod {
     }
     public void init() {
         log.info("BaseMod Init called");
-        PlayerActions.register(Move.class);
+        PlayerActions.register(Teleport.class);
         PlayerActions.register(Attack.class);
     }
     public void postinit() {

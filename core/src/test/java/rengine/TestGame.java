@@ -2,7 +2,7 @@ package rengine;
 
 import main.java.rengine.Server;
 import main.java.rengine.actions.Attack;
-import main.java.rengine.actions.Move;
+import main.java.rengine.actions.Teleport;
 import main.java.rengine.base.BaseCreature;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -72,7 +72,7 @@ public class TestGame {
         waitTick(1);
         // put move action on stack
         server.getStack().add(
-                new Move(server.getMap().getSlot(0,0), 1, 0, server.getMap()));
+                new Teleport(server.getMap().getSlot(0,0), 1, 0, server.getMap()));
 
         // wait till end
         gameThread.join();

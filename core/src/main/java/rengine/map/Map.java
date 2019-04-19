@@ -4,6 +4,7 @@ import main.java.rengine.base.BaseEntity;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import lombok.Getter;
 
@@ -72,4 +73,15 @@ public class Map {
         }
         return entities;
     }
+
+    public Slot findEntity(UUID id) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (!map[i][j].isEmpty() && map[i][j].getEntity().getId() == id)
+                    return map[i][j];
+            }
+        }
+        return null;
+    }
+
 }

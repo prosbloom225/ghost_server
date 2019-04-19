@@ -6,6 +6,8 @@ import main.java.rengine.actions.IAttacker;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 /**
  * Created by prosbloom on 11/4/17.
  */
