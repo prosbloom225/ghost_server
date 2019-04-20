@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import main.java.rengine.actions.Attack;
 import main.java.rengine.actions.Move;
 import main.java.rengine.actions.Teleport;
 import main.java.rengine.base.BaseCreature;
@@ -18,6 +19,7 @@ import main.java.rengine.client.RengineClient;
 import main.java.rengine.map.Slot;
 import main.java.rengine.map.TileMap;
 import main.java.rengine.client.screens.GameScreen;
+import main.java.rengine.mod.Player;
 
 import java.util.UUID;
 
@@ -82,6 +84,11 @@ public class GameStage extends Stage {
     public boolean keyUp(int keycode) {
         if(keycode == Input.Keys.A) {
             Slot s = RengineClient.server.getMap().findEntity(playerID);
+            RengineClient.server.getStack().add(new Attack(
+                    (Player)RengineClient.server.getMap().findEntity(playerID).getEntity(),
+                    RengineClient.server.getMap().getEntityAtSlot(s.x-1, s.y)));
+        }
+        if(keycode == Input.Keys.T) {
             RengineClient.server.getStack().add(new Teleport(RengineClient.server.getMap().findEntity(playerID), 1, 1, RengineClient.server.getMap()));
         }
         if(keycode == Input.Keys.S) {
