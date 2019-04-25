@@ -21,7 +21,7 @@ public class GameScreen implements Screen  {
     private Game game;
 
     private Slider slider;
-    private InputMultiplexer multiplexer;
+    public static InputMultiplexer multiplexer;
 
 
     public GameScreen(Game aGame) {

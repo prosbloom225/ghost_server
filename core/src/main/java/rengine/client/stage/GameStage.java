@@ -14,8 +14,8 @@ import main.java.rengine.actions.Attack;
 import main.java.rengine.actions.Move;
 import main.java.rengine.actions.Teleport;
 import main.java.rengine.base.BaseCreature;
-import main.java.rengine.base.BaseEntity;
 import main.java.rengine.client.RengineClient;
+import main.java.rengine.client.screens.SelectorScreen;
 import main.java.rengine.map.Slot;
 import main.java.rengine.map.TileMap;
 import main.java.rengine.client.screens.GameScreen;
@@ -31,7 +31,7 @@ public class GameStage extends Stage {
 
     TextureAtlas textureAtlas;
     TextureRegion textureRegion;
-    TileMap map;
+    public TileMap map;
 
     // Entities
     // Game obj
@@ -57,6 +57,7 @@ public class GameStage extends Stage {
         // call to NetworkService.getMap(x,y,w,h) to query server for the spriteNums at each slot
         for (int x = 0; x < map.getWidth(); x++)
             for (int y = 0; y < map.getHeight(); y++) {
+                // render the server sprites
                 if (!map.getSlot(x, y).equals(" ")) {
                     //System.out.println("Slot (" + x + "," + y + ") - " + map.getSlot(x, y).toString());
                     TextureRegion region = textureAtlas.getRegions().get(
@@ -65,6 +66,12 @@ public class GameStage extends Stage {
                     Sprite sprite = new Sprite(region);
                     sprite.setPosition(x*64, y*64);
                     sprite.draw(batch);
+                }
+                // render the client sprites
+                if (map.getSlot(x, y) != null) {
+                    Sprite sprite2 = new Sprite(textureAtlas.getRegions().get(map.getSlot(x,y).getSpriteNum()));
+                    sprite2.setPosition(x*64, y*64);
+                    sprite2.draw(batch);
                 }
             }
     }
@@ -80,6 +87,14 @@ public class GameStage extends Stage {
         batch.end();
     }
 
+    public void postAction(){
+        GameScreen.multiplexer.addProcessor(this);
+    }
+
+    public void teleportPlayer(Slot to) {
+        RengineClient.server.getStack().add(new Teleport(RengineClient.server.getMap().findEntity(playerID), to.x, to.y, RengineClient.server.getMap()));
+    }
+
     @Override
     public boolean keyUp(int keycode) {
         if(keycode == Input.Keys.A) {
@@ -89,7 +104,9 @@ public class GameStage extends Stage {
                     RengineClient.server.getMap().getEntityAtSlot(s.x-1, s.y)));
         }
         if(keycode == Input.Keys.T) {
-            RengineClient.server.getStack().add(new Teleport(RengineClient.server.getMap().findEntity(playerID), 1, 1, RengineClient.server.getMap()));
+            SelectorScreen selector = new SelectorScreen();
+            GameScreen.multiplexer.removeProcessor(this);
+            selector.getSingleSlot(this, RengineClient.server.getMap().findEntity(playerID));
         }
         if(keycode == Input.Keys.S) {
             BaseCreature creatureOne = BaseCreature.builder()
@@ -103,8 +120,8 @@ public class GameStage extends Stage {
                     .setCharisma(16)
                     .setName("creatureOne")
                     .setSpriteNum(512)
-                    .setHp(10)
-                    .setMaxHp(10)
+                    .setHp(30)
+                    .setMaxHp(30)
                     .build();
             RengineClient.server.getMap().setEntityAtSlot(1, 1, creatureOne);
         }

@@ -7,4 +7,5 @@ public interface IAction {
     boolean isDone();
 
     String getName();
+
 }

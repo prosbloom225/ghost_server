@@ -1,43 +1,43 @@
 package main.java.rengine.map;
 
-import main.java.rengine.client.Slot;
+import main.java.rengine.client.ClientSlot;
 import main.java.rengine.model.Entity;
 
 public class TileMap {
-    Slot[][] slotMap;
+    ClientSlot[][] clientSlotMap;
 
     public TileMap(int w, int h) {
 
-        slotMap = new Slot[w][h];
+        clientSlotMap = new ClientSlot[w][h];
 
-        for (int xx = 0; xx < slotMap.length; xx++) {
-            for (int yy = 0; yy < slotMap[xx].length; yy++) {
-                slotMap[xx][yy] = new Slot();
+        for (int xx = 0; xx < clientSlotMap.length; xx++) {
+            for (int yy = 0; yy < clientSlotMap[xx].length; yy++) {
+                clientSlotMap[xx][yy] = new ClientSlot(xx,yy);
             }
         }
-        slotMap[3][3].setEntity(new Entity(0001));
+        clientSlotMap[3][3].setEntity(new Entity(0001));
         for(int i=0; i < getHeight();i++) {
-            slotMap[i][i].setEntity(new Entity(i));
+            clientSlotMap[i][i].setEntity(new Entity(i));
         }
     }
 
     public int getHeight() {
-        return slotMap[0].length;
+        return clientSlotMap[0].length;
     }
     public int getWidth() {
-        return slotMap.length;
+        return clientSlotMap.length;
     }
-    public Slot getSlot(int x, int y) {
-        return slotMap[x][y];
+    public ClientSlot getSlot(int x, int y) {
+        return clientSlotMap[x][y];
     }
 
     public String toString() {
         String ret = "";
-        for (int y = 0; y < slotMap.length; y++) {
+        for (int y = 0; y < clientSlotMap.length; y++) {
             ret += "|";
-            for (int x = 0; x < slotMap[y].length; x++) {
-                if (slotMap[x][y] != null) {
-                    ret += slotMap[x][y].toString();
+            for (int x = 0; x < clientSlotMap[y].length; x++) {
+                if (clientSlotMap[x][y] != null) {
+                    ret += clientSlotMap[x][y].toString();
                 }
             }
             ret += "|\n";
