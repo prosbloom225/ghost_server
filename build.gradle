@@ -65,6 +65,7 @@ project(":desktop") {
 }
 project(":core") {
     apply plugin: "java"
+    apply plugin: "jacoco"
 
     //sourceSets.main.resources.srcDirs= ["main/resources"]
     test {
@@ -73,6 +74,8 @@ project(":core") {
             events "passed", "skipped", "failed"
         }
     }
+
+
 
     compileJava {
         sourceCompatibility = 1.8
